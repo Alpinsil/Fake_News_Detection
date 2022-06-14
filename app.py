@@ -22,7 +22,7 @@ def predict(text):
     review = [ps.stem(word) for word in review if not word in stopwords.words('english')]
     review = ' '.join(review)
     review_vect = tfidfvect.transform([review]).toarray()
-    prediction = 'FAKE' if model.predict(review_vect) == 0 else 'REAL'
+    prediction = 'FAKTA' if model.predict(review_vect) == 0 else 'HOAX'
     return prediction
 
 @app.route('/', methods=['POST'])
