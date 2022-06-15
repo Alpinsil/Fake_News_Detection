@@ -2,235 +2,161 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  
-  <title>ANHOX</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-  crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-  crossorigin=""></script>
-  <!-- Load Esri Leaflet from CDN -->
-  <script src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js"
-  integrity="sha512-E0DKVahIg0p1UHR2Kf9NX7x7TUewJb30mxkxEm2qOYTVJObgsAGpEol9F6iK6oefCbkJiA4/i6fnTHzM6H1kEA=="
-  crossorigin=""></script>
-  
-  
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  
-  </head>
-  
-  <body>
-    
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top ">
-      <div class="container d-flex align-items-center">
-        
-        <h1 class="logo me-auto"><a href="index.html">Fake News Prediction</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about"> Detect</a></li>
-            <!-- <li><a class="nav-link scrollto" href="https://rapidapi.com/fangyiyu/api/fake-news-detection1/"> API</a></li> -->
-            <!-- <li><a class="nav-link scrollto" href="https://medium.com/@fangyiyu/how-to-build-a-fake-news-detection-web-app-using-flask-c0cfd1d9c2d4?sk=2a752b0d87c759672664232b33543667/">Blog</a></li> -->
-            <!-- <li><a class="nav-link scrollto" href="https://github.com/fangyiyu/Fake_News_Detection_Flask/blob/main/Fake_news_detection.ipynb">Notebook</a></li> -->
-            <!-- <li><a class="nav-link scrollto" href="https://github.com/fangyiyu/Fake_News_Detection_Flask">Code Source</a></li> -->
-          
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-        
-      </div>
-    </header><!-- End Header -->
-    
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-            <h1>Hoax and Content Detection System</h1>
-            <h2>ANHOX merupakan singkatan dari "Anti Hoax" yaitu sistem informasi berbasis website yang dirancang dan dibangun dengan menggunakan 
-              Artificial Intelligence sebagai pendeteksi HOAX yang akurat.
-            </h2>
-  
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
-          </div>
-        </div>
-      </div>
-      
-    </section><!-- End Hero -->
-    
-    <main id="main">
-    
-      <!-- ======= About Us Section ======= -->
-      <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-          
-          <div class="section-title">
-            <h2>Detect your News</h2>
-          </div>
-          
-          <div class="row content">
-            <form action="/" method="POST">
-              <div class="col-three-forth text-center col-md-offset-2">
-                <div class="form-group">
-                  <textarea class="form-control jTextarea mt-3" id="jTextarea'" rows="5" name="text"
-                  placeholder="Write your text here..." required>{{text}}</textarea>
-                  <br>
-                  <br>
-                  <button class="btn btn-primary btn-outline btn-md" href="" name="predict">Predict</button>
-                </div>
-              </div>
-            </form>
-            <br>
-            <br>
-            {% if result %}
-            <p style="text-align:center"><strong>Prediction : {{result}}</strong></p>
-            {% endif %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-            <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeLwKQOvL29aP4ry-MQt7a1hXCyVfDbkRZUN-biAAAwBq_eHg/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe> -->
-            <script>
-              function growTextarea (i,elem) {
-                var elem = $(elem);
-                var resizeTextarea = function( elem ) {
-                  var scrollLeft = window.pageXOffset || (document.documentElement || document.body.parentNode || document.body).scrollLeft;
-                  var scrollTop  = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;  
-                  elem.css('height', 'auto').css('height', elem.prop('scrollHeight') );
-                  window.scrollTo(scrollLeft, scrollTop);
-                };
-                elem.on('input', function() {
-                  resizeTextarea( $(this) );
-                });
-                resizeTextarea( $(elem) );
-              }
-              
-              $('.jTextarea').each(growTextarea);
-            </script>
-        
-          </div>
-          
-        </div>
-      </section><!-- End About Us Section -->
-    
-      <!-- ======= Contact Section ======= -->
-      <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
-          
-          <div class="section-title">
-            <h2>Contact</h2>
-          </div>
-          
-          <div class="row">
-            
-            <div class="col-lg-5 d-flex align-items-stretch" style="height:600px; width: 1000px">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
-                  <p>INDONESIA</p>
-                </div>
-                
-                <div class="email">
-                  <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>watsonkelompok6@gmail.com</p>
-                </div>
-                
-                <div class="phone">
-                  <i class="bi bi-phone"></i>
-                  <h4>Call:</h4>
-                  <p>02125536346</p>
-                </div>
-                <div id="mapid" style ='height:300px; width: 100%'>
-                  <script>
-                    var mymap = L.map('mapid').setView([-6.219344,106.8117858], 17);
-                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoieXVkaGVlZWV0IiwiYSI6ImNrc2lremkzdjB0ZXkyb21iZDgwaWkyem0ifQ.zCNKGntSUcbbbojsPIjJ6g', {
-                      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                      maxZoom: 18,
-                      id: 'mapbox/streets-v11',
-                      tileSize: 512,
-                      zoomOffset: -1,
-                      accessToken: 'pk.eyJ1IjoieXVkaGVlZWV0IiwiYSI6ImNrc2lremkzdjB0ZXkyb21iZDgwaWkyem0ifQ.zCNKGntSUcbbbojsPIjJ6g'
-                    }).addTo(mymap);
-                    L.marker([-6.219344,106.8117858])
-                    .bindPopup()
-                    .addTo(mymap)
-                    ;
-                    
-                  </script>
-                </div>
-                <iframe frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen>
-                </iframe>
-              </div>
-              
+<body>
+    <nav>
+        <div class="wrapper">
+            <div class="logo"><a href="">Alvin Maulana S</a></div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#tutors">Tutors</a></li>
+                    <li><a href="#partners">Partners</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="" class="tbl-biru">Sign up</a></li>
+                </ul>
             </div>
-            
-           
-            
-          </div>
-          
         </div>
-      </section><!-- End Contact Section -->
-      
-    </main><!-- End #main -->
-    
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-    
-      <div class="container footer-bottom clearfix">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Kelompok 6 Watson</span></strong>. All Rights Reserved
+    </nav>
+    <div class="wrapper">
+        <!-- untuk bagian home -->
+        <br id="home"><br><br><br><br><br><br><br>
+        <section>
+            <div class="kolom">
+                <p class="deskripsi">Belajar programming</p>
+                <h2>Tetap sehat, Tetap semangat guys</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore temporibus quia sequi pariatur beatae
+                    porro, quo quod omnis expedita eos.</p>
+                    <p><a href="" class="tbl-pink">pelajari lebih lanjut</a></p>
+            </div>
+                <img src="https://img.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg?size=626&ext=jpg"
+                alt="coding">
+        </section>
+        <!-- untuk courses -->
+        <br id="courses"><br><br><br>
+        <section>
+            <div class="kolom">
+                <p class="deskripsi">You will Need This</p>
+                <h2>Online Courses</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur reiciendis eligendi et ipsa modi
+                    numquam velit labore unde aliquid in?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur reiciendis eligendi et ipsa modi
+                    numquam velit labore unde aliquid in?</p>
+                <p><a href="" class="tbl-biru">pelajari lebih lanjut</a></p>
+            </div>
+            <img src="https://img.freepik.com/free-vector/online-learning-isometric-concept_1284-17947.jpg?size=626&ext=jpg&ga=GA1.2.1769275626.1605867161"
+                alt="">
+        </section>
+        <!-- Untuk Tutors -->
+        <br id="tutors"><br><br>
+        <section>
+            <div class="tengah">
+                <div class="kolom">
+                    <p class="deskripsi">Our Top Tutors</p>
+                    <h2>Tutors</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum, praesentium.</p>
+                </div>
+                <div class="tutor-list">
+                    <div class="kartu-tutor">
+                        <img src="https://dfu1k3y1rami2.cloudfront.net/wp-content/uploads/2014/07/26195109/2020_cb.jpg"
+                            alt="tutor">
+                        <p>Jason lee scott</p>
+                    </div>
+                    <div class="kartu-tutor">
+                        <img
+                            src="https://images.ctfassets.net/1wryd5vd9xez/4DxzhQY7WFsbtTkoYntq23/a4a04701649e92a929010a6a860b66bf/https___cdn-images-1.medium.com_max_2000_1_Y6l_FDhxOI1AhjL56dHh8g.jpeg" />
+                        <p>John Doe</p>
+                    </div>
+                    <div class="kartu-tutor">
+                        <img
+                            src="https://images.fastcompany.net/image/upload/w_596,c_limit,q_auto:best,f_auto/fc/3021752-inline-i-1-why-square-designed-its-new-offices-to-work-like-a-city.jpg" />
+                        <p>Michael Dell</p>
+                    </div>
+                    <div class="kartu-tutor">
+                        <img
+                            src="https://blogs-images.forbes.com/jackkelly/files/2019/06/Jack-Kelly_avatar_1559658819-400x400.jpg" />
+                        <p>Bruce Wills</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- untuk partners -->
+        <br id="partners"><br><br>
+        <section>
+            <div class="tengah">
+                <div class="kolom">
+                    <p class="deskripsi">Our Top Partners</p>
+                    <h2>Partners</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore doloremque, eos mollitia
+                        officia, unde ratione ea debitis quidem, iure autem minus.</p>
+                </div>
+                <!-- partner list -->
+                <div class="partner-list">
+                    <div class="kartu-partner">
+                        <img
+                            src="https://www.designevo.com/res/templates/thumb_small/black-wheat-and-mortarboard.png" />
+                    </div>
+                    <div class="kartu-partner">
+                        <img
+                            src="https://image.freepik.com/free-vector/campus-collage-university-education-logo-design-template_7492-63.jpg" />
+                    </div>
+                    <div class="kartu-partner">
+                        <img
+                            src="https://image.freepik.com/free-vector/campus-collage-university-education-logo-design-template_7492-62.jpg" />
+                    </div>
+                    <div class="kartu-partner">
+                        <img
+                            src="https://www.designevo.com/res/templates/thumb_small/encircled-branches-and-book.png" />
+                    </div>
+                    <div class="kartu-partner">
+                        <img
+                            src="https://image.freepik.com/free-vector/campus-collage-university-education-logo-design-template_7492-64.jpg" />
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <!-- untuk contact -->
+    <br>
+    <div id="contact">
+        <div class="wrapper">
+            <div class="footer">
+                <div class="footer-section">
+                    <h3>Alpinsil</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, nulla!</p>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, nulla!</p>
+                </div>
+                <div class="footer-section">
+                    <h3>contact</h3>
+                    <p>Jl Anjasmoro No 27 Perum asabri kolor!</p>
+                    <p>085234278646</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Social</h3>
+                    <p>YouTube Alpinsil</p>
+                </div>
+            </div>
         </div>
-        <div class="credits">
-         
-          Designed by <a href="https://bootstrapmade.com/">Kelompok 6 Watson</a>
+
+    </div>
+    <!-- copyright -->
+    <div id="copyright">
+        <div class="wrapper">
+            &copy2022, <b>Alpinsil</b> All Rights Reserved.
         </div>
-      </div>
-    </footer><!-- End Footer -->
-    
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-    
-  </body>
-  
-  </html>
+    </div>
+</body>
+
+</html>
