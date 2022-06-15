@@ -1,76 +1,236 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Fake News Prediction</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-</head>
-
-<body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/">ANHOX</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="nav navbar-nav navbar-right" id="navbarNavAltMarkup">
-				<div class="navbar-nav">
-<!-- 					Navigation menu seperti about service dan lainnya -->
-				</div>
-			</div>
-		</div>
-	</nav>
-
-
-	<br>
-	<p style=text-align:center>Fake news detection on sosmed using django and deploy on heroku. </p>
-	<p style=text-align:center>Enter your text to try it.</p>
-	<br>
-	<div class='container'>
-		<form action="/" method="POST">
-			<div class="col-three-forth text-center col-md-offset-2">
-				<div class="form-group">
-					<textarea class="form-control jTextarea mt-3" id="jTextarea'" rows="5" name="text"
-					 placeholder="Write your text here..." required>{{text}}</textarea>
-
-					<br><br>
-					<button class="btn btn-primary btn-outline btn-md" type="submit" name="predict">Predict</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<br>
-	{% if result %}
-	<p style="text-align:center"><strong>Prediction : {{result}}</strong></p>
-	{% endif %}
-
-
-<script>
-     function growTextarea (i,elem) {
-    var elem = $(elem);
-    var resizeTextarea = function( elem ) {
-        var scrollLeft = window.pageXOffset || (document.documentElement || document.body.parentNode || document.body).scrollLeft;
-        var scrollTop  = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;  
-        elem.css('height', 'auto').css('height', elem.prop('scrollHeight') );
-          window.scrollTo(scrollLeft, scrollTop);
-      };
-      elem.on('input', function() {
-        resizeTextarea( $(this) );
-      });
-      resizeTextarea( $(elem) );
-  }
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-  $('.jTextarea').each(growTextarea);
-</script>
-</body>
+  <title>ANHOX</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js"
+  integrity="sha512-E0DKVahIg0p1UHR2Kf9NX7x7TUewJb30mxkxEm2qOYTVJObgsAGpEol9F6iK6oefCbkJiA4/i6fnTHzM6H1kEA=="
+  crossorigin=""></script>
+  
+  
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  
+  </head>
+  
+  <body>
+    
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+      <div class="container d-flex align-items-center">
+        
+        <h1 class="logo me-auto"><a href="index.html">Fake News Prediction</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about"> Detect</a></li>
+            <!-- <li><a class="nav-link scrollto" href="https://rapidapi.com/fangyiyu/api/fake-news-detection1/"> API</a></li> -->
+            <!-- <li><a class="nav-link scrollto" href="https://medium.com/@fangyiyu/how-to-build-a-fake-news-detection-web-app-using-flask-c0cfd1d9c2d4?sk=2a752b0d87c759672664232b33543667/">Blog</a></li> -->
+            <!-- <li><a class="nav-link scrollto" href="https://github.com/fangyiyu/Fake_News_Detection_Flask/blob/main/Fake_news_detection.ipynb">Notebook</a></li> -->
+            <!-- <li><a class="nav-link scrollto" href="https://github.com/fangyiyu/Fake_News_Detection_Flask">Code Source</a></li> -->
+          
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        
+      </div>
+    </header><!-- End Header -->
+    
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+            <h1>Hoax and Content Detection System</h1>
+            <h2>ANHOX merupakan singkatan dari "Anti Hoax" yaitu sistem informasi berbasis website yang dirancang dan dibangun dengan menggunakan 
+              Artificial Intelligence sebagai pendeteksi HOAX yang akurat.
+            </h2>
+  
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+            <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+          </div>
+        </div>
+      </div>
+      
+    </section><!-- End Hero -->
+    
+    <main id="main">
+    
+      <!-- ======= About Us Section ======= -->
+      <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+          
+          <div class="section-title">
+            <h2>Detect your News</h2>
+          </div>
+          
+          <div class="row content">
+            <form action="/" method="POST">
+              <div class="col-three-forth text-center col-md-offset-2">
+                <div class="form-group">
+                  <textarea class="form-control jTextarea mt-3" id="jTextarea'" rows="5" name="text"
+                  placeholder="Write your text here..." required>{{text}}</textarea>
+                  <br>
+                  <br>
+                  <button class="btn btn-primary btn-outline btn-md" href="" name="predict">Predict</button>
+                </div>
+              </div>
+            </form>
+            <br>
+            <br>
+            {% if result %}
+            <p style="text-align:center"><strong>Prediction : {{result}}</strong></p>
+            {% endif %}
 
-</html>
+            <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeLwKQOvL29aP4ry-MQt7a1hXCyVfDbkRZUN-biAAAwBq_eHg/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe> -->
+            <script>
+              function growTextarea (i,elem) {
+                var elem = $(elem);
+                var resizeTextarea = function( elem ) {
+                  var scrollLeft = window.pageXOffset || (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+                  var scrollTop  = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;  
+                  elem.css('height', 'auto').css('height', elem.prop('scrollHeight') );
+                  window.scrollTo(scrollLeft, scrollTop);
+                };
+                elem.on('input', function() {
+                  resizeTextarea( $(this) );
+                });
+                resizeTextarea( $(elem) );
+              }
+              
+              $('.jTextarea').each(growTextarea);
+            </script>
+        
+          </div>
+          
+        </div>
+      </section><!-- End About Us Section -->
+    
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+          
+          <div class="section-title">
+            <h2>Contact</h2>
+          </div>
+          
+          <div class="row">
+            
+            <div class="col-lg-5 d-flex align-items-stretch" style="height:600px; width: 1000px">
+              <div class="info">
+                <div class="address">
+                  <i class="bi bi-geo-alt"></i>
+                  <h4>Location:</h4>
+                  <p>INDONESIA</p>
+                </div>
+                
+                <div class="email">
+                  <i class="bi bi-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>watsonkelompok6@gmail.com</p>
+                </div>
+                
+                <div class="phone">
+                  <i class="bi bi-phone"></i>
+                  <h4>Call:</h4>
+                  <p>02125536346</p>
+                </div>
+                <div id="mapid" style ='height:300px; width: 100%'>
+                  <script>
+                    var mymap = L.map('mapid').setView([-6.219344,106.8117858], 17);
+                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoieXVkaGVlZWV0IiwiYSI6ImNrc2lremkzdjB0ZXkyb21iZDgwaWkyem0ifQ.zCNKGntSUcbbbojsPIjJ6g', {
+                      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                      maxZoom: 18,
+                      id: 'mapbox/streets-v11',
+                      tileSize: 512,
+                      zoomOffset: -1,
+                      accessToken: 'pk.eyJ1IjoieXVkaGVlZWV0IiwiYSI6ImNrc2lremkzdjB0ZXkyb21iZDgwaWkyem0ifQ.zCNKGntSUcbbbojsPIjJ6g'
+                    }).addTo(mymap);
+                    L.marker([-6.219344,106.8117858])
+                    .bindPopup()
+                    .addTo(mymap)
+                    ;
+                    
+                  </script>
+                </div>
+                <iframe frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen>
+                </iframe>
+              </div>
+              
+            </div>
+            
+           
+            
+          </div>
+          
+        </div>
+      </section><!-- End Contact Section -->
+      
+    </main><!-- End #main -->
+    
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+    
+      <div class="container footer-bottom clearfix">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Kelompok 6 Watson</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+         
+          Designed by <a href="https://bootstrapmade.com/">Kelompok 6 Watson</a>
+        </div>
+      </div>
+    </footer><!-- End Footer -->
+    
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+    
+  </body>
+  
+  </html>
